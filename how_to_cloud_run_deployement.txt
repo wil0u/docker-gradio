@@ -1,0 +1,21 @@
+Prérequis : Être authentifié à google cloud et avoir set le bon projet gcp. Personnellement j'utilise cloud Shell qui est un shell se trouvant sur gcp 
+et donc l'authentification est déjà faite. Il suffit juste de set le bon project ID via cette commande:
+
+gcloud config set project MON_PROJECT_ID
+
+Unique commande à lancer pour déployer (depuis le dossier contenant le Dockerfile): 
+
+gcloud run deploy gradio-app \
+  --source . \
+  --region europe-west1 \
+  --platform managed \
+  --allow-unauthenticated
+
+
+Détail de ce que fait la commande : 
+
+gradio-app : nom du service Cloud Run
+--source . : build l’image Docker à partir du Dockerfile et push automatiquement dans Artifact Registry
+--region europe-west1 : région (Paris / Belgique proche)
+--platform managed : Cloud Run fully managed
+--allow-unauthenticated : accès public (sinon 403)
